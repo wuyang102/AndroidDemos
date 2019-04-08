@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CoordinatorLayout</string>
+    <string name="title">title</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="coordinate_layout">coordinate_layout</string>
+</resources>
