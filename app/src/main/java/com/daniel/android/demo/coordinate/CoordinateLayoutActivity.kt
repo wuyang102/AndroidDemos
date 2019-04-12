@@ -1,4 +1,4 @@
-package com.daniel.android.demo
+package com.daniel.android.demo.coordinate
 
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +9,8 @@ import android.support.v4.view.ViewCompat
 import android.support.v4.view.WindowInsetsCompat
 import android.view.View
 import android.view.ViewGroup
+import com.daniel.android.demo.R
+import com.daniel.android.demo.SimpleAdapter
 import kotlinx.android.synthetic.main.activity_coordinate_layout.*
 
 class CoordinateLayoutActivity : AppCompatActivity() {

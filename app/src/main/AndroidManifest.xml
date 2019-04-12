@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".CoordinateLayoutActivity"
+                android:name=".coordinate.CoordinateLayoutActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
