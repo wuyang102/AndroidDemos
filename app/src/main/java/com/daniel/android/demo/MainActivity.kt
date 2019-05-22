@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.daniel.android.demo.coordinate.CoordinateLayoutActivity
+import com.daniel.android.demo.coroutine.CoroutineActivity
 import kotlinx.android.extensions.LayoutContainer
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,7 +19,8 @@ import kotlin.reflect.KClass
 class MainActivity : AppCompatActivity() {
 
     val list = listOf(
-        R.string.coordinate_layout to CoordinateLayoutActivity::class
+        R.string.coordinate_layout to CoordinateLayoutActivity::class,
+        R.string.coroutine to CoroutineActivity::class
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

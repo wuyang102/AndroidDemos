@@ -3,7 +3,10 @@ package com.daniel.android.demo.rxjava2
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 /**
  * @author wuyang
@@ -29,5 +32,16 @@ class Rxjava2Test {
                 println(it.message)
             }
         }.subscribe { Thread.sleep(12000) }
+    }
+
+    @Test
+    fun subjectTest() {
+        val subject = PublishSubject.interval(300, TimeUnit.MILLISECONDS)
+        subject.subscribeOn(Schedulers.newThread())
+            .subscribe { println("one:$it") }
+        Thread.sleep(400)
+        subject.subscribeOn(Schedulers.newThread())
+            .subscribe { println("two:$it") }
+        Thread.sleep(1700)
     }
 }

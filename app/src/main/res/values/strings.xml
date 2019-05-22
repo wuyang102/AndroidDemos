@@ -4,4 +4,7 @@
     <string name="title_activity_main">MainActivity</string>
 
     <string name="coordinate_layout">coordinate_layout</string>
+    <string name="title_activity_coroutine">CoroutineActivity</string>
+
+    <string name="coroutine">coroutine</string>
 </resources>
