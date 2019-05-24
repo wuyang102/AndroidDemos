@@ -7,4 +7,5 @@
     <string name="title_activity_coroutine">CoroutineActivity</string>
 
     <string name="coroutine">coroutine</string>
+    <string name="dagger2">dagger2</string>
 </resources>

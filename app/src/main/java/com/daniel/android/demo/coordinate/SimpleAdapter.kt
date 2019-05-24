@@ -1,15 +1,18 @@
-package com.daniel.android.demo
+package com.daniel.android.demo.coordinate
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import com.daniel.android.demo.R
+import javax.inject.Inject
 
 /**
  * @author wuyang
  */
-class SimpleAdapter : RecyclerView.Adapter<SimpleViewHolder>() {
+class SimpleAdapter @Inject constructor() : RecyclerView.Adapter<SimpleViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
         return SimpleViewHolder(view as TextView)

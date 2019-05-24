@@ -20,7 +20,7 @@ class Rxjava2Test {
                 println("start")
                 Observable.create<Int> { emitter2 ->
                     for (i in 1..5) {
-                        if (i == 2) throw Exception("error")
+                        if (i == 4) throw Exception("error")
                         emitter2.onNext(i)
                         Thread.sleep(2000)
                     }

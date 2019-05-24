@@ -1,5 +1,6 @@
 package com.daniel.android.demo
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
@@ -8,23 +9,21 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.daniel.android.demo.coordinate.CoordinateLayoutActivity
-import com.daniel.android.demo.coroutine.CoroutineActivity
 import kotlinx.android.extensions.LayoutContainer
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_button.*
+import javax.inject.Inject
 import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
 
-    val list = listOf(
-        R.string.coordinate_layout to CoordinateLayoutActivity::class,
-        R.string.coroutine to CoroutineActivity::class
-    )
+    @Inject
+    lateinit var list: List<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Graph.appComponent().inject(this)
         setContentView(R.layout.activity_main)
         listView.adapter = ItemAdapter()
     }
@@ -50,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         fun <T : Any> bind(@StringRes content: Int, clazz: KClass<T>) {
             button.setText(content)
             button.setOnClickListener {
-                startActivity(Intent(this@MainActivity, clazz.java)) }
+                startActivity(Intent(this@MainActivity, clazz.java))
+            }
         }
     }
 }
