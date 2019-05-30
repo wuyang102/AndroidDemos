@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,17 +12,27 @@ import kotlinx.android.extensions.LayoutContainer
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_button.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Provider
 import kotlin.reflect.KClass
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity(), AnkoLogger {
 
     @Inject
     lateinit var list: List<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>
 
+    @Inject
+    lateinit var ts: Provider<Long>
+
+    @Inject
+    @field:Named("hashcode")
+    lateinit var hashCode: Provider<Int>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Graph.appComponent().inject(this)
         setContentView(R.layout.activity_main)
         listView.adapter = ItemAdapter()
     }
@@ -49,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         fun <T : Any> bind(@StringRes content: Int, clazz: KClass<T>) {
             button.setText(content)
             button.setOnClickListener {
-                startActivity(Intent(this@MainActivity, clazz.java))
+                startActivity(Intent(this@MainActivity, clazz.java).putExtra("ts", ts.get()))
+                info { "timestamp: ${ts.get()}, hashcode: ${hashCode.get()}" }
             }
         }
     }

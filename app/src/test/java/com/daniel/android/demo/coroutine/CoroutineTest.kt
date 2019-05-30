@@ -408,4 +408,16 @@ class CoroutineTest {
             println("$t")
         }
     }
+
+    @Test
+    fun asyncTest2() = runBlocking(Dispatchers.Default) {
+        println("loading")
+        withContext(Dispatchers.IO) {
+            delay(1000)
+            withContext(Dispatchers.Default) {
+                println("do something")
+            }
+        }
+        println("finish")
+    }
 }

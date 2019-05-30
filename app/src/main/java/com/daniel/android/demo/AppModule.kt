@@ -10,10 +10,16 @@ import kotlin.reflect.KClass
  * @author wuyang
  */
 @Module
-class AppModule {
+abstract class AppModule {
 
-    @Provides
-    @Singleton
-    fun provideActivities(set: Set<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>)
-            : List<Pair<Int, KClass<out Activity>>> = ArrayList(set)
+    @Module
+    companion object {
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideActivities(set: Set<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>)
+                : List<Pair<Int, KClass<out Activity>>> = ArrayList(set)
+    }
+
 }
