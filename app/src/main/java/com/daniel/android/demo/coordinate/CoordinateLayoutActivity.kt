@@ -2,10 +2,10 @@ package com.daniel.android.demo.coordinate
 
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v4.view.OnApplyWindowInsetsListener
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.WindowInsetsCompat
+import androidx.annotation.RequiresApi
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import android.view.View
 import android.view.ViewGroup
 import com.daniel.android.demo.BaseActivity

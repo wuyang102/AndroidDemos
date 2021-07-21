@@ -1,8 +1,8 @@
 package com.daniel.android.demo.coordinate
 
 import android.content.Context
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import android.util.AttributeSet
 import android.view.View
 import org.jetbrains.anko.AnkoLogger
@@ -30,7 +30,7 @@ class AppBarLayoutOverScrollBehavior(context: Context?, attrs: AttributeSet?) : 
 
     private var count = 0
 
-    override fun onLayoutChild(parent: CoordinatorLayout?, abl: AppBarLayout?, layoutDirection: Int): Boolean {
+    override fun onLayoutChild(parent: CoordinatorLayout, abl: AppBarLayout, layoutDirection: Int): Boolean {
         val result = super.onLayoutChild(parent, abl, layoutDirection)
         if (null == mTargetView) {
             mTargetView = parent!!.findViewWithTag(TAG)

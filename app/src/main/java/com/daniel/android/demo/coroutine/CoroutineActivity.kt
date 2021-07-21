@@ -1,7 +1,7 @@
 package com.daniel.android.demo.coroutine
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import com.daniel.android.demo.databinding.ActivityCoroutineBinding
 import io.reactivex.Observable
 

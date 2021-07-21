@@ -2,23 +2,23 @@ package com.daniel.android.demo
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentManager.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.*
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 /**
  * @author wuyang
  */
-class DemoApplication : Application(), HasActivityInjector {
+class DemoApplication : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate() {
         super.onCreate()
@@ -53,16 +53,20 @@ class DemoApplication : Application(), HasActivityInjector {
         })
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
 
     private fun handleActivityCreate(activity: Activity) {
-        if (activity is HasSupportFragmentInjector) {
+        if (activity is HasAndroidInjector) {
             AndroidInjection.inject(activity)
         }
         if (activity is FragmentActivity) {
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(
                 object : FragmentLifecycleCallbacks() {
-                    override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?, savedInstanceState: Bundle?) {
+                    override fun onFragmentAttached(
+                        fm: FragmentManager,
+                        f: Fragment,
+                        context: Context
+                    ) {
                         if (f is Injectable) AndroidSupportInjection.inject(f)
                     }
                 }, true
