@@ -1,16 +1,18 @@
 package com.daniel.android.demo.dagger2
 
 import android.os.Bundle
-import com.daniel.android.demo.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.daniel.android.demo.R
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
 
-class Dagger2Activity : BaseActivity() {
+@AndroidEntryPoint
+class Dagger2Activity : AppCompatActivity() {
 
     @Inject
-    @field:Named("ts")
+    @Named("ts")
     lateinit var ts: Provider<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {

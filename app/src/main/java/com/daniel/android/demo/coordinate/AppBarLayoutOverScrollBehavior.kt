@@ -5,12 +5,10 @@ import com.google.android.material.appbar.AppBarLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import android.util.AttributeSet
 import android.view.View
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import android.animation.ValueAnimator
+import android.util.Log
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
-import org.jetbrains.anko.warn
 
 
 /**
@@ -19,8 +17,8 @@ import org.jetbrains.anko.warn
 const val TAG = "overScroll"
 const val TARGET_HEIGHT = 260f
 
-class AppBarLayoutOverScrollBehavior(context: Context?, attrs: AttributeSet?) : AppBarLayout.Behavior(context, attrs),
-    AnkoLogger {
+class AppBarLayoutOverScrollBehavior(context: Context?, attrs: AttributeSet?) :
+    AppBarLayout.Behavior(context, attrs) {
 
     constructor(context: Context?) : this(context, null)
 
@@ -153,5 +151,13 @@ class AppBarLayoutOverScrollBehavior(context: Context?, attrs: AttributeSet?) : 
     private fun setTargetViewTopMargin(top: Int) {
         (mTargetView!!.layoutParams as ViewGroup.MarginLayoutParams).topMargin = top + mTargetViewTopMargin
         mTargetView!!.requestLayout()
+    }
+
+    private fun warn(content: String) {
+        Log.w(this.javaClass.simpleName, content)
+    }
+
+    private fun info(content: String) {
+        Log.i(this.javaClass.simpleName, content)
     }
 }

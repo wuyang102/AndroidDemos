@@ -3,20 +3,22 @@ package com.daniel.android.demo
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.daniel.android.demo.databinding.ActivityMainBinding
 import com.daniel.android.demo.databinding.ItemButtonBinding
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
-class MainActivity : BaseActivity(), AnkoLogger {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var list: List<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>
@@ -25,7 +27,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
     lateinit var ts: Provider<Long>
 
     @Inject
-    @field:Named("hashcode")
+    @Named("hashcode")
     lateinit var hashCode: Provider<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +61,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
                 button.setText(content)
                 button.setOnClickListener {
                     startActivity(Intent(this@MainActivity, clazz.java).putExtra("ts", ts.get()))
-                    info { "timestamp: ${ts.get()}, hashcode: ${hashCode.get()}" }
+                    Log.i(MainActivity::class.simpleName, "timestamp: ${ts.get()}, hashcode: ${hashCode.get()}")
                 }
             }
         }

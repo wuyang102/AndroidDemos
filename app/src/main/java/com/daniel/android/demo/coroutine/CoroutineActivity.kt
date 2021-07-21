@@ -1,17 +1,18 @@
 package com.daniel.android.demo.coroutine
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.daniel.android.demo.databinding.ActivityCoroutineBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.rx2.openSubscription
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 
-class CoroutineActivity : AppCompatActivity(), AnkoLogger {
+@AndroidEntryPoint
+class CoroutineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class CoroutineActivity : AppCompatActivity(), AnkoLogger {
                         binding.includeContent.textView.text = it.toString()
                     }
                 } catch (t: Throwable) {
-                    info { "$t" }
+                    Log.e(CoroutineActivity::class.simpleName, "$t")
                 }
             }
         }

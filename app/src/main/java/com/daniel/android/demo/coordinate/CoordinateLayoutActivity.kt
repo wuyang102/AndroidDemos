@@ -8,11 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.view.View
 import android.view.ViewGroup
-import com.daniel.android.demo.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.daniel.android.demo.databinding.ActivityCoordinateLayoutBinding
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class CoordinateLayoutActivity : BaseActivity() {
+@AndroidEntryPoint
+class CoordinateLayoutActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: SimpleAdapter

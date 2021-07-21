@@ -3,6 +3,8 @@ package com.daniel.android.demo
 import android.app.Activity
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import kotlin.reflect.KClass
 
@@ -10,16 +12,12 @@ import kotlin.reflect.KClass
  * @author wuyang
  */
 @Module
-abstract class AppModule {
+@InstallIn(SingletonComponent::class)
+object AppModule {
 
-    @Module
-    companion object {
-
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun provideActivities(set: Set<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>)
-                : List<Pair<Int, KClass<out Activity>>> = ArrayList(set)
-    }
+    @Provides
+    @Singleton
+    fun provideActivities(set: Set<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>)
+            : List<Pair<Int, KClass<out Activity>>> = ArrayList(set)
 
 }

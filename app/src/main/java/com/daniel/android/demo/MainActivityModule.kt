@@ -2,38 +2,23 @@ package com.daniel.android.demo
 
 import dagger.Module
 import dagger.Provides
-import dagger.android.ContributesAndroidInjector
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 
 /**
  * @author wuyang
  */
 @Module
-abstract class MainActivityModule {
+@InstallIn(SingletonComponent::class)
+object MainActivityModule {
 
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [MainActivityScopeModel::class])
-    abstract fun contributeMainAcitivtyInjector(): MainActivity
-
-
-    @Module
-    abstract class MainActivityScopeModel {
-
-        @Module
-        companion object {
-
-            @JvmStatic
-            @ActivityScope
-            @Provides
-            fun provideCurrentTimestamp(): Long = System.currentTimeMillis()
+    @Provides
+    fun provideCurrentTimestamp(): Long = System.currentTimeMillis()
 
 
-            @JvmStatic
-            @ActivityScope
-            @Provides
-            @Named("hashcode")
-            fun provideInt(activity: MainActivity): Int = activity.hashCode()
-        }
-    }
+    @Provides
+    @Named("hashcode")
+    fun provideInt(): Int = hashCode()
 
 }
