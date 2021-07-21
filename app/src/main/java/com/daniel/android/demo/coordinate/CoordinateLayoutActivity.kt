@@ -9,8 +9,7 @@ import android.support.v4.view.WindowInsetsCompat
 import android.view.View
 import android.view.ViewGroup
 import com.daniel.android.demo.BaseActivity
-import com.daniel.android.demo.R
-import kotlinx.android.synthetic.main.activity_coordinate_layout.*
+import com.daniel.android.demo.databinding.ActivityCoordinateLayoutBinding
 import javax.inject.Inject
 
 class CoordinateLayoutActivity : BaseActivity() {
@@ -22,15 +21,16 @@ class CoordinateLayoutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        setContentView(R.layout.activity_coordinate_layout)
-        recyclerView.adapter = adapter
+        val binding = ActivityCoordinateLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerView.adapter = adapter
         val listener = OnApplyWindowInsetsListener { v, insets ->
             for (i in 0 until (v as ViewGroup).childCount)
                 ViewCompat.dispatchApplyWindowInsets(v.getChildAt(i), copyWindowInsetsCompat(insets))
             insets.consumeSystemWindowInsets()
         }
-        ViewCompat.setOnApplyWindowInsetsListener(appBarLayout, listener)
-        ViewCompat.setOnApplyWindowInsetsListener(toolbarLayout, listener)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout, listener)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbarLayout, listener)
     }
 
     private fun copyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat =

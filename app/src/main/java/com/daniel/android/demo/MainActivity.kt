@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.extensions.LayoutContainer
-
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_button.*
+import com.daniel.android.demo.databinding.ActivityMainBinding
+import com.daniel.android.demo.databinding.ItemButtonBinding
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import javax.inject.Inject
@@ -33,15 +30,17 @@ class MainActivity : BaseActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        listView.adapter = ItemAdapter()
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.listView.adapter = ItemAdapter()
     }
 
     inner class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_button, parent, false)
-            return ItemViewHolder(view)
+            val inflater = LayoutInflater.from(parent.context)
+            val binding = ItemButtonBinding.inflate(inflater, parent, false)
+            return ItemViewHolder(binding)
         }
 
         override fun getItemCount(): Int = list.size
@@ -52,14 +51,16 @@ class MainActivity : BaseActivity(), AnkoLogger {
 
     }
 
-    inner class ItemViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+    inner class ItemViewHolder(private val binding: ItemButtonBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun <T : Any> bind(@StringRes content: Int, clazz: KClass<T>) {
-            button.setText(content)
-            button.setOnClickListener {
-                startActivity(Intent(this@MainActivity, clazz.java).putExtra("ts", ts.get()))
-                info { "timestamp: ${ts.get()}, hashcode: ${hashCode.get()}" }
+            with(binding) {
+                button.setText(content)
+                button.setOnClickListener {
+                    startActivity(Intent(this@MainActivity, clazz.java).putExtra("ts", ts.get()))
+                    info { "timestamp: ${ts.get()}, hashcode: ${hashCode.get()}" }
+                }
             }
         }
     }
