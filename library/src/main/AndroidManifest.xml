@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.daniel.android.demo.library">
+
+    <application>
+        <activity android:name="com.daniel.android.library.rxjava.RxjavaActivity"></activity>
+        <activity android:name="com.daniel.android.libary.hilt.HiltTestActivity" />
+    </application>
+
+</manifest>

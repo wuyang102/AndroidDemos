@@ -1,0 +1,4 @@
+<resources>
+    <string name="hilt_test">HILT</string>
+    <string name="rxjava_test">RXJAVA</string>
+</resources>

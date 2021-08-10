@@ -11,8 +11,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.rx2.openSubscription
 
-@AndroidEntryPoint
-class CoroutineActivity : AppCompatActivity() {
+@AndroidEntryPoint(AppCompatActivity::class)
+class CoroutineActivity : Hilt_CoroutineActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

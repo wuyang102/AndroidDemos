@@ -298,29 +298,29 @@ class CoroutineTest {
         println("Done")
     }
 
-    @Test
-    fun takeUntilTest() = runBlocking {
-        rangeWithInterval(1000, 1, 10).takeUtil(coroutineContext, publish<Unit> { delay(4500) })
-            .collect { println("$it") }
-    }
+//    @Test
+//    fun takeUntilTest() = runBlocking {
+//        rangeWithInterval(1000, 1, 10).takeUtil(coroutineContext, publish<Unit> { delay(4500) })
+//            .collect { println("$it") }
+//    }
 
-    private fun <T, U> Publisher<T>.takeUtil(context: CoroutineContext, other: Publisher<U>) =
-        GlobalScope.publish<T>(context) {
-            this@takeUtil.openSubscription().consume {
-                var current = this
-                other.openSubscription().consume {
-                    var other = this
-                    whileSelect {
-                        other.onReceiveOrNull { false }
-                        current.onReceive {
-                            send(it)
-                            true
-                        }
-
-                    }
-                }
-            }
-        }
+//    private fun <T, U> Publisher<T>.takeUtil(context: CoroutineContext, other: Publisher<U>) =
+//        GlobalScope.publish<T>(context) {
+//            this@takeUtil.openSubscription().consume {
+//                var current = this
+//                other.openSubscription().consume {
+//                    var other = this
+//                    whileSelect {
+//                        other.onReceiveOrNull { false }
+//                        current.onReceive {
+//                            send(it)
+//                            true
+//                        }
+//
+//                    }
+//                }
+//            }
+//        }
 
     private fun CoroutineScope.rangeWithInterval(time: Long, start: Int, count: Int) = publish<Int> {
         for (x in start until start + count) {
@@ -329,31 +329,31 @@ class CoroutineTest {
         }
     }
 
-    private fun <T> Publisher<T>.merge(context: CoroutineContext, other: Publisher<T>) =
-        GlobalScope.publish(context) {
-            this@merge.openSubscription().consume {
-                var current = this
-                other.openSubscription().consume {
-                    var other = this
-                    whileSelect {
-                        current.onReceive {
-                            send(it)
-                            true
-                        }
-                        other.onReceive {
-                            send(it)
-                            true
-                        }
-                    }
-                }
-            }
-        }
+//    private fun <T> Publisher<T>.merge(context: CoroutineContext, other: Publisher<T>) =
+//        GlobalScope.publish(context) {
+//            this@merge.openSubscription().consume {
+//                var current = this
+//                other.openSubscription().consume {
+//                    var other = this
+//                    whileSelect {
+//                        current.onReceive {
+//                            send(it)
+//                            true
+//                        }
+//                        other.onReceive {
+//                            send(it)
+//                            true
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-    @Test
-    fun rxMergeTest() = runBlocking {
-        rangeWithInterval(200, 1, 9).merge(coroutineContext, rangeWithInterval(200, 10, 19))
-            .collect { println("$it") }
-    }
+//    @Test
+//    fun rxMergeTest() = runBlocking {
+//        rangeWithInterval(200, 1, 9).merge(coroutineContext, rangeWithInterval(200, 10, 19))
+//            .collect { println("$it") }
+//    }
 
     private fun rangeWithIntervalRx(scheduler: Scheduler, time: Long, start: Int, count: Int): Flowable<Int> =
         Flowable.zip(

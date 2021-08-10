@@ -44,4 +44,17 @@ class Rxjava2Test {
             .subscribe { println("two:$it") }
         Thread.sleep(1700)
     }
+
+    @Test
+    fun subscribeOnTest() {
+        Observable.fromCallable { 1 }
+            .doOnSubscribe { println("before ${Thread.currentThread().name}") }
+            .subscribeOn(Schedulers.computation())
+            .doOnSubscribe { println("middle ${Thread.currentThread().name}") }
+            .subscribeOn(Schedulers.newThread())
+            .doOnSubscribe { println("after ${Thread.currentThread().name}") }
+            .subscribe { println("$it ${Thread.currentThread().name}") }
+        Thread.sleep(1000)
+    }
+
 }

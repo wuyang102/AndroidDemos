@@ -11,8 +11,8 @@ import com.daniel.android.demo.databinding.Dagger2FragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class Dagger2Fragment : Fragment() {
+@AndroidEntryPoint(Fragment::class)
+class Dagger2Fragment : Hilt_Dagger2Fragment() {
 
     companion object {
         fun newInstance() = Dagger2Fragment()

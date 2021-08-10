@@ -6,5 +6,5 @@ import dagger.hilt.android.HiltAndroidApp
 /**
  * @author wuyang
  */
-@HiltAndroidApp
-class DemoApplication : MultiDexApplication()
+@HiltAndroidApp(MultiDexApplication::class)
+class DemoApplication : Hilt_DemoApplication()
