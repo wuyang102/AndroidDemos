@@ -13,8 +13,8 @@ import com.daniel.android.demo.databinding.ActivityCoordinateLayoutBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint(AppCompatActivity::class)
-class CoordinateLayoutActivity : Hilt_CoordinateLayoutActivity () {
+@AndroidEntryPoint
+class CoordinateLayoutActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: SimpleAdapter

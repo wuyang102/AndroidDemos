@@ -4,7 +4,7 @@
 
     <application>
         <activity android:name="com.daniel.android.library.rxjava.RxjavaActivity"></activity>
-        <activity android:name="com.daniel.android.libary.hilt.HiltTestActivity" />
+        <activity android:name="com.daniel.android.library.hilt.HiltTestActivity" />
     </application>
 
 </manifest>

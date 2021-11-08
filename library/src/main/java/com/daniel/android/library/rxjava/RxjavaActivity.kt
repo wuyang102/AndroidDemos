@@ -13,8 +13,8 @@ import kotlin.concurrent.thread
 import kotlin.math.abs
 import kotlin.random.Random
 
-@AndroidEntryPoint(AppCompatActivity::class)
-class RxjavaActivity : Hilt_RxjavaActivity() {
+@AndroidEntryPoint
+class RxjavaActivity : AppCompatActivity() {
 
     private val publish = PublishSubject.create<Int>()
     private lateinit var binding: ActivityRxjavaBinding

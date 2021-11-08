@@ -8,8 +8,8 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
 
-@AndroidEntryPoint(AppCompatActivity::class)
-class Dagger2Activity : Hilt_Dagger2Activity() {
+@AndroidEntryPoint
+class Dagger2Activity : AppCompatActivity() {
 
     @Inject
     @Named("ts")

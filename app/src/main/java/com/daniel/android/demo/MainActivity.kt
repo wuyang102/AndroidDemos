@@ -17,8 +17,8 @@ import javax.inject.Named
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
-@AndroidEntryPoint(AppCompatActivity::class)
-class MainActivity : Hilt_MainActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var list: List<@JvmSuppressWildcards Pair<Int, KClass<out Activity>>>

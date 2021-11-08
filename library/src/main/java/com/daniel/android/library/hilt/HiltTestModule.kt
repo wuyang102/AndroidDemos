@@ -1,4 +1,4 @@
-package com.daniel.android.libary.hilt
+package com.daniel.android.library.hilt
 
 import android.app.Activity
 import com.daniel.android.demo.library.R
